@@ -1,15 +1,59 @@
-h1{
-    color: blue;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    text-transform: uppercase;
-    font-size: 50px;
+/* style.css */
+
+/* Add your custom styles without overriding Tailwind defaults */
+
+/* 1. General custom body style */
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-900 font-sans;
+  }
 }
 
-p{
-    color: green;
-    font-size: 20px;
-    font-family: 'Times New Roman', serif;
-    line-height: 1.5;
-    margin: 20px;
+/* 2. Smooth transitions for nav links */
+@layer components {
+  .nav-link {
+    @apply transition-colors duration-300 hover:text-indigo-600;
+  }
+}
+
+/* 3. Mobile menu animations */
+@layer utilities {
+  .slide-in {
+    animation: slideIn 0.3s ease forwards;
+  }
+  .slide-out {
+    animation: slideOut 0.3s ease forwards;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideOut {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+}
+
+/* 4. Popover transitions */
+@layer utilities {
+  .fade-in {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .fade-in[data-open="true"] {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
