@@ -8,17 +8,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (openMenuBtn && closeMenuBtn && mobileMenu) {
     openMenuBtn.addEventListener("click", () => {
-      mobileMenu.classList.add("slide-in");
       mobileMenu.showModal();
     });
 
     closeMenuBtn.addEventListener("click", () => {
-      mobileMenu.classList.remove("slide-in");
-      mobileMenu.classList.add("slide-out");
+      mobileMenu.close();
+    });
 
+    // Smooth closing animation
+    mobileMenu.addEventListener("close", () => {
+      mobileMenu.setAttribute("closing", "");
       setTimeout(() => {
-        mobileMenu.classList.remove("slide-out");
-        mobileMenu.close();
+        mobileMenu.removeAttribute("closing");
       }, 300);
     });
   }
@@ -32,13 +33,4 @@ document.addEventListener("DOMContentLoaded", () => {
       productMenu.hidden = !productMenu.hidden;
     });
   }
-
-  // Popover fade in/out (desktop)
-  const popovers = document.querySelectorAll("[popover]");
-  popovers.forEach((popover) => {
-    popover.classList.add("fade-in");
-    popover.addEventListener("toggle", () => {
-      popover.dataset.open = popover.matches(":popover-open");
-    });
-  });
 });
